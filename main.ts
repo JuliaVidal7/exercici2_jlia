@@ -17,6 +17,17 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . 8 7 8 . 
         . . . 6 7 7 8 . 
         `, mySprite, 0, -50)
+    music.pewPew.play()
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    ASTEROIDE.destroy()
+    otherSprite.destroy(effects.confetti, 500)
+    info.changeScoreBy(1)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.changeScoreBy(-1)
+    otherSprite.destroy(effects.fire, 500)
+    scene.cameraShake(4, 500)
 })
 let ASTEROIDE: Sprite = null
 let projectile: Sprite = null
